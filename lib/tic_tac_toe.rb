@@ -17,8 +17,9 @@ def input_to_index(user_input)
   user_input.to_i - 1
 end
 
-def move(board, index, current_player)
-  board[index] = current_player
+def move(board, index, token)
+  board[index] = token
+#  token = "X" || "O"
 end
 
 def position_taken?(board, index)
@@ -36,3 +37,21 @@ def valid_move?(board, index)
     return false
   end
 end
+
+def turn(board)
+   puts "Please enter a number 1-9:"
+   input = gets.strip
+   index = input_to_index(input)
+   if !valid_move?(board, index)
+     turn(board)
+  end
+  move(board, index, token)
+  display_board(board)
+end
+ #   if valid_move?(board, index)
+ #     move(board, index, token)
+ #     display_board(board)
+ #   else
+ #     turn(board)
+ #   end
+ # end
