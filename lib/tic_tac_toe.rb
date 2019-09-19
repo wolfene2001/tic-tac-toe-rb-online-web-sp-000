@@ -17,16 +17,16 @@ def input_to_index(user_input)
   user_input.to_i - 1
 end
 
-def move(board, index, token)
-  board[index] = token
-#  token = "X" || "O"
+def move(board, index, current_player)
+  board[index] = current_player
+
 end
 
 def position_taken?(board, index)
-  if board[index] != " "
-     return true
+  if board[index] == " "
+     return false
    else
-return false
+return true
 end
 end
 
@@ -42,16 +42,70 @@ def turn(board)
    puts "Please enter a number 1-9:"
    input = gets.strip
    index = input_to_index(input)
-   if !valid_move?(board, index)
-     turn(board)
+
+    if valid_move?(board, index)
+      move(board, index, current_player(board))
+      display_board(board)
+    else
+      turn(board)
+    end
   end
-  move(board, index, token)
-  display_board(board)
+
+def turn_count(board)
+  turn = 0
+  board.each do |token|
+    if token == "X" || token == "O"
+    turn += 1
+  end
 end
- #   if valid_move?(board, index)
- #     move(board, index, token)
- #     display_board(board)
- #   else
- #     turn(board)
- #   end
- # end
+turn
+end
+
+def current_player(board)
+  if turn_count(board) % 2 != 0
+    return "O"
+  elsif turn_count(board) % 2 == 0
+    return "X"
+  end
+end
+
+def won?(board)
+  WIN_COMBINATIONS.find do |combo|
+    board[combo[0]] == board[combo[1]] && board[combo[2]] ==
+    board[combo[1]] && position_taken?(board,[combo[0]])
+    return WIN_COMBINATIONS
+  end
+  false
+  end
+end
+
+def full?(board)
+  board.find do |token|
+    if token == " "
+      return false
+    end
+  end
+
+
+
+def draw?(board)
+  if full?(board) == true && !won?(board)
+    return true
+  else
+    return false
+  end
+end
+
+def over?(board)
+  if draw?(board) == true || full?(board) == true || !!won?(board) == true
+    return true
+  else
+    return false
+  end
+end
+
+def winner?(board)
+  if combo = won?(board)
+    return board[combo[0]]
+  end
+end
