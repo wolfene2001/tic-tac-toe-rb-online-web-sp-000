@@ -23,11 +23,11 @@ def move(board, index, current_player)
 end
 
 def position_taken?(board, index)
-  if board[index]== "X" || board[index] == "O"
+  if board[index] == "X" || board[index] == "O"
 
-     return false
+     return true
    else
-return true
+return false
 end
 end
 
@@ -73,7 +73,7 @@ end
 def won?(board)
   WIN_COMBINATIONS.find do |combo|
     board[combo[0]] == board[combo[1]] && board[combo[2]] ==
-    board[combo[1]] && position_taken?(board,[combo[0]])
+    board[combo[1]] && position_taken?(board,combo[0])
     #return combo
   end
   #false
@@ -108,8 +108,18 @@ def over?(board)
   end
 end
 
-def winner?(board)
-  if combo = won?(board)
-    return board[combo[0]] == "X" || board[combo[0]] == "O"
-  end
+def winner(board)
+  if won?(board)
+  win_combo = won?(board)
+  return board[win_combo[0]]
+end
+nil
+  # if !!won?(board) == true
+  #   return combo == ["O","O","O"] || combo == ["X","X","X"]
+  # end
+  # nil
+end
+
+def play(board)
+  input = gets
 end
