@@ -122,10 +122,10 @@ def play(board)
   until over?(board)
 
   elsif winner?(board)
-    return true
+     true
       puts "Congratulations!"
   else draw?(board)
-    return true
+     true
     puts "Cat's Game!"
   end
 end
