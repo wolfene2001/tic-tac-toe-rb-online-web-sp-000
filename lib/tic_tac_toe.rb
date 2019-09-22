@@ -121,5 +121,8 @@ nil
 end
 
 def play(board)
-  input = gets
+  input = gets turn(board)
+  while turn_count(board)
+  until over?(board)
+end
 end
