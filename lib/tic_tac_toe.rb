@@ -120,5 +120,12 @@ def play(board)
   input = gets turn(board)
   while turn_count(board)
   until over?(board)
-end
+
+  elsif winner?(board)
+    return true
+      puts "Congratulations!"
+  else draw?(board)
+    return true
+    puts "Cat's Game!"
+  end
 end
