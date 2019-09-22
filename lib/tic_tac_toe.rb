@@ -117,14 +117,14 @@ nil
 end
 
 def play(board)
-  input = gets turn(board)
-  while turn_count(board)
+      
   until over?(board)
-
-  elsif winner?(board)
+    turn(board)
+  end
+  if winner?(board)
      true
       puts "Congratulations!"
-  else draw?(board)
+  elsif draw?(board)
      true
     puts "Cat's Game!"
   end
