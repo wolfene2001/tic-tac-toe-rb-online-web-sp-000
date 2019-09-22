@@ -112,14 +112,20 @@ def winner(board)
   if won?(board)
   win_combo = won?(board)
   return board[win_combo[0]]
-end
+  end
 nil
-  # if !!won?(board) == true
-  #   return combo == ["O","O","O"] || combo == ["X","X","X"]
-  # end
-  # nil
 end
 
 def play(board)
-  input = gets
+
+  until over?(board)
+    turn(board)
+  end
+  if winner(board)
+     true
+      puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+     true
+    puts "Cat's Game!"
+  end
 end
